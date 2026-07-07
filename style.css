@@ -1,37 +1,87 @@
+/* ==========================================================================
+   PHASE 1: GLOBAL DESIGN SYSTEM & VARIABLES
+   ========================================================================== */
+:root {
+    /* Premium Dark Color Palette */
+    --bg-main: #0b0b0b;
+    --bg-card: #111111;
+    --bg-input: #161616;
+    --border-color: #1f1f1f;
+    --border-hover: #333333;
+    
+    /* Luxury Studio Accent Colors (Pure White, Deep Slate, Subtle Zinc Glow) */
+    --accent-text: #ffffff;
+    --text-muted: #8e8e93;
+    --text-para: #d1d1d6;
+    --gradient-glow: linear-gradient(135deg, #1c1c1e 0%, #0c0c0e 100%);
+    --gradient-btn-hover: linear-gradient(90deg, #ffffff 0%, #e5e5ea 100%);
+
+    /* Architectural Layout Assets */
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+    --radius-pill: 30px;
+    
+    /* High-End Motion Settings */
+    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --shadow-premium: 0 30px 60px rgba(0, 0, 0, 0.6);
+    --shadow-card-hover: 0 20px 40px rgba(255, 255, 255, 0.03);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #0b0b0b;
-    color: white;
-    line-height: 1.6;
-    overflow-x: hidden; /* Prevents awkward horizontal mobile scrolling */
+html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-main);
 }
 
-/* ==========================================
-   HEADER & NAVIGATION
-   ========================================== */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-main);
+    color: var(--accent-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   PHASE 2: NAVIGATION & FIXED STICKY HEADER
+   ========================================================================== */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 8%;
+    padding: 20px 8%;
     position: sticky;
     top: 0;
-    background: rgba(11, 11, 11, 0.95); /* Smooth glass effect */
-    backdrop-filter: blur(10px);        /* Blurs elements behind header on scroll */
+    background: rgba(11, 11, 11, 0.8); 
+    backdrop-filter: blur(16px);        
+    -webkit-backdrop-filter: blur(16px); /* High-end glassmorphism blur */
     z-index: 100;
-    border-bottom: 1px solid #1a1a1a;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition-smooth);
+}
+
+.header-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header h1 {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.5px;
+    background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 nav {
@@ -40,137 +90,198 @@ nav {
 }
 
 nav a {
-    color: white;
+    color: var(--text-muted);
     text-decoration: none;
-    margin-left: 25px;
-    font-size: 15px;
+    margin-left: 32px;
+    font-size: 14px;
     font-weight: 500;
-    transition: color 0.3s ease;
+    position: relative;
+    padding: 4px 0;
+    transition: var(--transition-smooth);
+}
+
+/* Phase 2: Active Link Indicator / Hover Line effect */
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--accent-text);
+    transition: var(--transition-smooth);
 }
 
 nav a:hover {
-    color: #888;
+    color: var(--accent-text);
 }
 
-/* ==========================================
-   GLOBAL SECTIONS
-   ========================================== */
+nav a:hover::after {
+    width: 100%;
+}
+
+/* ==========================================================================
+   GLOBAL SECTION ARCHITECTURE & MAXIMUM BOUNDS (DESKTOP VIEW FIX)
+   ========================================================================== */
 section {
-    min-height: 100vh;
+    min-height: 90vh;
     padding: 120px 8%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-bottom: 1px solid #121212;
+}
+
+/* DESKTOP BOUNDING FIX: Binds all rows inside a centered grid container */
+.section-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; 
 }
 
 section h2 {
-    font-size: 42px;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    letter-spacing: -1px;
+    font-size: 48px;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    letter-spacing: -1.5px;
+    font-weight: 700;
+    max-width: 800px;
 }
 
 section p {
-    color: #bdbdbd;
-    max-width: 600px;
-    font-size: 17px;
+    color: var(--text-para);
+    max-width: 640px;
+    font-size: 18px;
 }
 
 .section-tag,
 .hero-text span {
-    color: #888;
-    font-size: 12px;
+    color: var(--text-muted);
+    font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: 600;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
 
-/* ==========================================
-   HERO (HOME) SECTION
-   ========================================== */
+/* ==========================================================================
+   PHASE 3: PREMIUM HERO (HOME) SECTION
+   ========================================================================== */
 #home {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    gap: 60px;
+    justify-content: center;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 80px;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .hero-text {
-    max-width: 650px;
+    max-width: 680px;
 }
 
 #home h2 {
-    font-size: 56px;
+    font-size: 62px;
     line-height: 1.1;
     margin: 20px 0 25px 0;
+    letter-spacing: -2px;
 }
 
 #home p {
-    font-size: 19px;
-    color: #ccc;
+    font-size: 20px;
+    color: var(--text-para);
 }
 
-/* Container managing the main hero buttons */
 .hero-buttons {
     display: flex;
     flex-direction: row;
-    gap: 15px;
-    margin-top: 35px;
+    gap: 16px;
+    margin-top: 40px;
 }
 
+/* Phase 3 visual abstract interactive mockup container */
 .hero-card {
-    width: 320px;
-    height: 380px;
-    border: 1px solid #222;
-    border-radius: 24px;
-    padding: 35px;
+    width: 100%;
+    height: 420px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 40px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    background: linear-gradient(145deg, #141414, #0f0f0f);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    background: var(--gradient-glow);
+    box-shadow: var(--shadow-premium);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+/* Phase 5 Animation Ambient background glow */
+.hero-card::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -30%;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+    transition: var(--transition-smooth);
+}
+
+.hero-card:hover::before {
+    transform: translate(-10px, -10px) scale(1.1);
 }
 
 .hero-card h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
+    font-size: 24px;
+    margin-bottom: 12px;
+    font-weight: 600;
 }
 
-/* ==========================================
-   BUTTONS STYLING
-   ========================================== */
+.hero-card p {
+    font-size: 15px;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   BUTTONS INTERACTIVE DESIGN SYSTEM
+   ========================================================================== */
 button,
 .project-btn {
-    padding: 14px 32px;
+    padding: 14px 34px;
     border: none;
     background: #ffffff;
     color: #000000;
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
-    border-radius: 30px;
+    border-radius: var(--radius-pill);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: var(--transition-smooth);
 }
 
+/* Phase 5: Subtle Button lifts on hover */
 button:hover,
 .project-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
-    background: #eaeaea;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(255, 255, 255, 0.15);
+    background: var(--gradient-btn-hover);
 }
 
-/* Outline Button variant */
 .project-btn.outline-btn {
     background: transparent;
     color: #ffffff;
-    border: 2px solid #ffffff; /* Brighter, clean white border */
+    border: 1px solid var(--border-hover);
 }
 
 .project-btn.outline-btn:hover {
@@ -179,90 +290,121 @@ button:hover,
     border-color: #ffffff;
 }
 
-/* ==========================================
-   PROJECTS SECTION
-   ========================================== */
+/* ==========================================================================
+   PHASE 4: EVERY OTHER SECTION STYLING (CARDS, GRIDS & TIMELINES)
+   ========================================================================== */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     margin-top: 50px;
+    width: 100%;
 }
 
 .project-card {
-    border: 1px solid #222;
-    border-radius: 24px;
-    padding: 25px;
-    height: 520px;
-    background: #111;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    height: 100%;
+    background: var(--bg-card);
     display: flex;
     flex-direction: column;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: var(--transition-smooth);
 }
 
 .project-card img {
     width: 100%;
     height: 220px;
     object-fit: cover;
-    border-radius: 16px;
+    border-radius: var(--radius-md);
     margin-bottom: 25px;
-    background: #1a1a1a; /* Sleek dark placeholder background if image fails */
+    background: #181818;
     display: block;
 }
 
 .project-card h3 {
     font-size: 24px;
     letter-spacing: -0.5px;
+    margin-bottom: 10px;
 }
 
 .project-card p {
-    margin-top: 12px;
     font-size: 15px;
-    color: #aaa;
+    color: var(--text-muted);
+    line-height: 1.6;
 }
 
-/* Forces button inside card to stick perfectly to bottom */
 .project-card .project-btn {
     margin-top: auto;
     width: 100%;
 }
 
+/* Phase 5 Animation: Cards gently scale and grow borders */
 .project-card:hover {
-    transform: translateY(-10px);
-    border-color: #444;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    transform: translateY(-8px);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-premium), var(--shadow-card-hover);
 }
 
-/* ==========================================
-   CONTACT FORM INPUTS
-   ========================================== */
+/* Custom icon styling for richer service items */
+.service-icon {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: var(--text-muted);
+}
+
+/* Process Timeline Layout Fixes */
+.process-card {
+    border-left: 2px solid var(--border-color) !important;
+    border-radius: 0px !important;
+    background: transparent !important;
+    padding-left: 25px !important;
+}
+
+.process-card:hover {
+    border-left-color: #ffffff !important;
+    transform: translateX(5px);
+    box-shadow: none !important;
+}
+
+.process-step {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   CONTACT FORM & CALL TO ACTION PANEL
+   ========================================================================== */
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-top: 30px;
+    margin-top: 40px;
     width: 100%;
-    max-width: 500px; /* Keeps the form from overstretching on desktop */
+    max-width: 550px; 
 }
 
 .contact-form input,
 .contact-form textarea {
     width: 100%;
-    padding: 14px 20px;
-    background: #161616;
-    border: 1px solid #2c2c2c;
-    border-radius: 12px;
+    padding: 16px 22px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
     color: #ffffff;
     font-size: 15px;
     font-family: inherit;
     outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: var(--transition-smooth);
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
     border-color: #ffffff; 
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+    background: #1a1a1a;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.02);
 }
 
 .contact-form button {
@@ -270,67 +412,114 @@ button:hover,
     width: 100%;
 }
 
-/* ==========================================
-   FOOTER
-   ========================================== */
+/* ==========================================================================
+   FOOTER SETUP
+   ========================================================================== */
 footer {
-    padding: 40px 8%;
-    border-top: 1px solid #1a1a1a;
+    padding: 80px 8% 60px 8%;
+    border-top: 1px solid var(--border-color);
     text-align: center;
-    color: #666;
-    font-size: 14px;
 }
 
-/* ==========================================
-   RESPONSIVE DESIGN (MOBILE FIXES)
-   ========================================== */
-@media (max-width: 992px) {
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer .logo {
+    font-weight: 700; 
+    color: #fff; 
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+footer p {
+    font-size: 14px; 
+    color: var(--text-muted);
+}
+
+.footer-links {
+    display: flex; 
+    justify-content: center; 
+    gap: 28px; 
+    margin: 30px 0;
+}
+
+.footer-links a {
+    color: var(--text-muted); 
+    text-decoration: none; 
+    font-size: 13px;
+    transition: var(--transition-smooth);
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+/* ==========================================================================
+   PHASE 6: MEDIA RESPONSIVE CONTROLS (TABLETS & SMARTPHONES)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    section {
+        padding: 90px 6%;
+    }
+    
+    .hero-grid {
+        gap: 40px;
+    }
+    
+    #home h2 {
+        font-size: 48px;
+    }
+    
     .projects-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 768px) {
-    /* MOBILE HEADER UPGRADE */
     header {
-        flex-direction: column;
-        padding: 18px 5%;
-        text-align: center;
-        gap: 14px;
+        padding: 20px 5%;
     }
 
-    header h1 {
-        font-size: 22px;
+    /* Mobile Header Layout Stacking */
+    .header-wrapper {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
     }
 
     nav {
         justify-content: center;
-        gap: 16px;
+        gap: 20px;
         flex-wrap: wrap;
         width: 100%;
     }
 
     nav a {
-        margin: 0; /* Clears desktop alignment margins */
+        margin: 0; 
         font-size: 14px;
     }
 
     section {
         padding: 80px 5%;
-        min-height: auto; /* Fixes text overcrowding */
+        min-height: auto;
     }
 
-    #home {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 40px;
+    section h2 {
+        font-size: 36px;
+    }
+
+    /* Mobile Hero Layout Stacking */
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
     }
 
     #home h2 {
-        font-size: 38px;
+        font-size: 40px;
     }
 
-    /* SMOOTH STACKING LAYOUT FOR BUTTONS */
     .hero-buttons {
         flex-direction: column;
         width: 100%;
@@ -342,17 +531,16 @@ footer {
     }
 
     .hero-card {
-        width: 100%;
-        height: 300px;
+        height: 340px;
+        padding: 30px;
     }
 
     .projects-grid {
         grid-template-columns: 1fr;
         gap: 25px;
     }
-
+    
     .project-card {
-        height: auto;
-        min-height: 480px;
+        min-height: auto;
     }
 }
