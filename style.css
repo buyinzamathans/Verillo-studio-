@@ -105,12 +105,14 @@ nav a:hover {
     margin: 0 auto;
 }
 
-.hero-text span {
+/* FIX: Targeted class selector for the small hero tag line */
+.hero-text .hero-tag {
     color: var(--accent-gold);
     font-size: 12px;
     letter-spacing: 2px;
     font-weight: 700;
     text-transform: uppercase;
+    display: block;
 }
 
 #home h2 {
@@ -121,10 +123,13 @@ nav a:hover {
     margin: 15px 0 25px 0;
 }
 
-/* Highlight text accent styling trick */
-#home h2 em, .highlight-gold {
-    font-style: normal;
+/* FIX: Force high-contrast gold highlight text to stay full font size and weight */
+#home h2 .highlight-gold {
     color: var(--accent-gold);
+    font-size: inherit;
+    font-weight: inherit;
+    text-transform: none;
+    letter-spacing: normal;
 }
 
 #home p {
@@ -139,7 +144,7 @@ nav a:hover {
     gap: 16px;
 }
 
-/* --- THE MOBILE BUG FIX: Changed height to min-height, added variable background --- */
+/* FIX: Dynamic card height with clean variable fallback container styling */
 .hero-card {
     width: 100%;
     min-height: 380px;
@@ -296,7 +301,7 @@ section h2 {
     width: fit-content;
     padding: 10px 20px;
     font-size: 13px;
-    margin-top: auto; /* Pushes button to bottom of card naturally */
+    margin-top: auto; /* Alignment anchor */
 }
 
 .project-card:hover {
@@ -405,10 +410,9 @@ footer {
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (FIXES SQUEEZED HERO TEXT BUG)
+   RESPONSIVE DESIGN (LAPTOP AND SMARTPHONE AUTO CLAMPING)
    ========================================================================== */
 @media (max-width: 1100px) {
-    /* BREAK THE GRID EARLY: This forces columns to drop vertical before text text clips */
     .hero-grid {
         grid-template-columns: 1fr;
         gap: 40px;
