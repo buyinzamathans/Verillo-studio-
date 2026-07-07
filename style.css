@@ -267,10 +267,6 @@
     border-radius: 30px;
     font-size: 16px;
     font-weight: 600;
-    margin-top: 30px;
+    width: fit-content;
     transition: 0.3s ease;
-}
-
-.project-btn:hover {
-    opacity: 0.8;
 }
