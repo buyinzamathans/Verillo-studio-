@@ -103,5 +103,69 @@
                                                                                                                                                                                                                                                                 font-size: 40px;
                                                                                                                                                                                                                                                                     }
 
-                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                    } 
+}
+#home {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.hero-text {
+    max-width: 700px;
+}
+
+.hero-text span {
+    color: #888;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.outline-btn {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+}
+
+
+.hero-card {
+    width: 300px;
+    height: 350px;
+    border: 1px solid #333;
+    border-radius: 25px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    background: linear-gradient(
+        145deg,
+        #181818,
+        #0b0b0b
+    );
+}
+
+
+.hero-card h3 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+
+@media(max-width:768px){
+
+    #home {
+        flex-direction: column;
+    }
+
+    .hero-card {
+        width: 100%;
+    }
+
 }
