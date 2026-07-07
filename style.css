@@ -169,3 +169,53 @@
     }
 
 }
+.section-tag {
+        color: #888;
+            font-size: 13px;
+                letter-spacing: 3px;
+                }
+
+
+                .projects-grid {
+                    display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                            gap: 25px;
+                                margin-top: 40px;
+                                }
+
+
+                                .project-card {
+                                    border: 1px solid #333;
+                                        border-radius: 25px;
+                                            padding: 30px;
+                                                min-height: 300px;
+                                                    display: flex;
+                                                        flex-direction: column;
+                                                            justify-content: space-between;
+                                                                background: #111;
+                                                                }
+
+
+                                                                .project-card h3 {
+                                                                    font-size: 25px;
+                                                                    }
+
+
+                                                                    .project-card p {
+                                                                        margin-top: 15px;
+                                                                        }
+
+
+                                                                        .project-card button {
+                                                                            margin-top: 30px;
+                                                                            }
+
+
+                                                                            @media(max-width:768px){
+
+                                                                                .projects-grid {
+                                                                                        grid-template-columns: 1fr;
+                                                                                            }
+
+                                                                                            }
+}
