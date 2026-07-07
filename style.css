@@ -1,31 +1,19 @@
 /* ==========================================================================
-   PHASE 1: GLOBAL DESIGN SYSTEM & VARIABLES
+   THE MATHAN STUDIO DESIGN SYSTEM
    ========================================================================== */
 :root {
-    /* Premium Dark Color Palette */
-    --bg-main: #0b0b0b;
-    --bg-card: #111111;
-    --bg-input: #161616;
-    --border-color: #1f1f1f;
-    --border-hover: #333333;
+    --bg-darker: #050507;       /* Deep obsidian canvas background */
+    --bg-section: #090a0f;      /* Alternate section background for contrast */
+    --bg-surface: #0e1017;      /* Clean card surface colors */
+    --accent-gold: #e2a13a;     /* Premium studio signature gold */
+    --accent-gold-hover: #f3b655;
+    --border-subtle: #171b26;   /* Clean luxury alignment lines */
+    --text-pure: #ffffff;
+    --text-muted: #848999;
+    --text-para: #b1b5c4;
     
-    /* Luxury Studio Accent Colors (Pure White, Deep Slate, Subtle Zinc Glow) */
-    --accent-text: #ffffff;
-    --text-muted: #8e8e93;
-    --text-para: #d1d1d6;
-    --gradient-glow: linear-gradient(135deg, #1c1c1e 0%, #0c0c0e 100%);
-    --gradient-btn-hover: linear-gradient(90deg, #ffffff 0%, #e5e5ea 100%);
-
-    /* Architectural Layout Assets */
-    --radius-lg: 24px;
-    --radius-md: 16px;
-    --radius-sm: 12px;
-    --radius-pill: 30px;
-    
-    /* High-End Motion Settings */
-    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    --shadow-premium: 0 30px 60px rgba(0, 0, 0, 0.6);
-    --shadow-card-hover: 0 20px 40px rgba(255, 255, 255, 0.03);
+    --radius-studio: 12px;      /* Sharp, sleek modern agency corners */
+    --transition-premium: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -36,39 +24,35 @@
 
 html {
     scroll-behavior: smooth;
-    background-color: var(--bg-main);
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg-main);
-    color: var(--accent-text);
+    background: var(--bg-darker);
+    color: var(--text-pure);
     line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
 
 /* ==========================================================================
-   PHASE 2: NAVIGATION & FIXED STICKY HEADER
+   NAVIGATION HEADER
    ========================================================================== */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 8%;
-    position: sticky;
+    padding: 24px 8%;
+    position: absolute; /* Keeps hero clean and un-blocked */
     top: 0;
-    background: rgba(11, 11, 11, 0.8); 
-    backdrop-filter: blur(16px);        
-    -webkit-backdrop-filter: blur(16px); /* High-end glassmorphism blur */
+    left: 0;
+    width: 100%;
     z-index: 100;
-    border-bottom: 1px solid var(--border-color);
-    transition: var(--transition-smooth);
 }
 
 .header-wrapper {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -76,12 +60,10 @@ header {
 }
 
 header h1 {
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 800;
     letter-spacing: -0.5px;
-    background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
 }
 
 nav {
@@ -90,325 +72,271 @@ nav {
 }
 
 nav a {
-    color: var(--text-muted);
+    color: var(--text-para);
     text-decoration: none;
-    margin-left: 32px;
+    margin-right: 35px;
     font-size: 14px;
     font-weight: 500;
-    position: relative;
-    padding: 4px 0;
-    transition: var(--transition-smooth);
-}
-
-/* Phase 2: Active Link Indicator / Hover Line effect */
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: var(--accent-text);
-    transition: var(--transition-smooth);
+    transition: var(--transition-premium);
 }
 
 nav a:hover {
-    color: var(--accent-text);
-}
-
-nav a:hover::after {
-    width: 100%;
+    color: var(--accent-gold);
 }
 
 /* ==========================================================================
-   GLOBAL SECTION ARCHITECTURE & MAXIMUM BOUNDS (DESKTOP VIEW FIX)
-   ========================================================================== */
-section {
-    min-height: 90vh;
-    padding: 120px 8%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-bottom: 1px solid #121212;
-}
-
-/* DESKTOP BOUNDING FIX: Binds all rows inside a centered grid container */
-.section-content {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto; 
-}
-
-section h2 {
-    font-size: 48px;
-    line-height: 1.15;
-    margin-bottom: 24px;
-    letter-spacing: -1.5px;
-    font-weight: 700;
-    max-width: 800px;
-}
-
-section p {
-    color: var(--text-para);
-    max-width: 640px;
-    font-size: 18px;
-}
-
-.section-tag,
-.hero-text span {
-    color: var(--text-muted);
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 16px;
-}
-
-/* ==========================================================================
-   PHASE 3: PREMIUM HERO (HOME) SECTION
+   HERO SECTIONS (ASYMMETRICAL LAYOUT)
    ========================================================================== */
 #home {
+    min-height: 100vh;
+    background: radial-gradient(circle at 80% 20%, #111422 0%, var(--bg-darker) 70%);
+    padding: 160px 8% 100px 8%;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .hero-grid {
     display: grid;
-    grid-template-columns: 1.25fr 0.75fr;
-    gap: 80px;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
     align-items: center;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
-.hero-text {
-    max-width: 680px;
+.hero-text span {
+    color: var(--accent-gold);
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 #home h2 {
-    font-size: 62px;
-    line-height: 1.1;
-    margin: 20px 0 25px 0;
+    font-size: 56px;
+    line-height: 1.15;
+    font-weight: 700;
     letter-spacing: -2px;
+    margin: 15px 0 25px 0;
+}
+
+/* Highlight text accent styling trick */
+#home h2 em, .highlight-gold {
+    font-style: normal;
+    color: var(--accent-gold);
 }
 
 #home p {
-    font-size: 20px;
-    color: var(--text-para);
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 540px;
+    margin-bottom: 40px;
 }
 
 .hero-buttons {
     display: flex;
-    flex-direction: row;
     gap: 16px;
-    margin-top: 40px;
 }
 
-/* Phase 3 visual abstract interactive mockup container */
+/* Abstract Mockup Element Frame */
 .hero-card {
     width: 100%;
-    height: 420px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    background: var(--gradient-glow);
-    box-shadow: var(--shadow-premium);
+    height: 480px;
+    background: url('ronnie.jpg') center/cover no-repeat; /* Tip: Swap with workspace view or wireframes */
+    border-radius: var(--radius-studio);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+    border: 1px solid var(--border-subtle);
     position: relative;
-    overflow: hidden;
-    transition: var(--transition-smooth);
-}
-
-/* Phase 5 Animation Ambient background glow */
-.hero-card::before {
-    content: '';
-    position: absolute;
-    top: -30%;
-    right: -30%;
-    width: 80%;
-    height: 80%;
-    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
-    transition: var(--transition-smooth);
-}
-
-.hero-card:hover::before {
-    transform: translate(-10px, -10px) scale(1.1);
-}
-
-.hero-card h3 {
-    font-size: 24px;
-    margin-bottom: 12px;
-    font-weight: 600;
-}
-
-.hero-card p {
-    font-size: 15px;
-    color: var(--text-muted);
 }
 
 /* ==========================================================================
-   BUTTONS INTERACTIVE DESIGN SYSTEM
+   BUTTON DESIGN SYSTEM
    ========================================================================== */
-button,
 .project-btn {
-    padding: 14px 34px;
-    border: none;
-    background: #ffffff;
-    color: #000000;
-    font-size: 15px;
+    padding: 14px 28px;
+    font-size: 14px;
     font-weight: 600;
-    cursor: pointer;
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-studio);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition-smooth);
+    transition: var(--transition-premium);
+    background: var(--accent-gold);
+    color: var(--bg-darker);
 }
 
-/* Phase 5: Subtle Button lifts on hover */
-button:hover,
 .project-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 24px rgba(255, 255, 255, 0.15);
-    background: var(--gradient-btn-hover);
+    background: var(--accent-gold-hover);
+    transform: translateY(-2px);
 }
 
 .project-btn.outline-btn {
     background: transparent;
-    color: #ffffff;
-    border: 1px solid var(--border-hover);
+    color: var(--text-pure);
+    border: 1px solid var(--border-subtle);
 }
 
 .project-btn.outline-btn:hover {
-    background: #ffffff;
-    color: #000000;
-    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--text-pure);
 }
 
 /* ==========================================================================
-   PHASE 4: EVERY OTHER SECTION STYLING (CARDS, GRIDS & TIMELINES)
+   SECTIONS & ARCHITECTURE
+   ========================================================================== */
+section {
+    padding: 120px 8%;
+    background: var(--bg-darker);
+}
+
+/* Alternate sections to clear monotony like the reference */
+#services, #process {
+    background: var(--bg-section);
+}
+
+.section-content {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.section-tag {
+    color: var(--accent-gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    display: block;
+}
+
+section h2 {
+    font-size: 36px;
+    letter-spacing: -1px;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+
+/* ==========================================================================
+   THE INTERACTIVE PROJECT CARDS
    ========================================================================== */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 50px;
-    width: 100%;
+    gap: 32px;
 }
 
 .project-card {
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 32px;
-    height: 100%;
-    background: var(--bg-card);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-studio);
+    padding: 24px;
     display: flex;
     flex-direction: column;
-    transition: var(--transition-smooth);
+    transition: var(--transition-premium);
 }
 
 .project-card img {
     width: 100%;
-    height: 220px;
+    height: 200px;
     object-fit: cover;
-    border-radius: var(--radius-md);
-    margin-bottom: 25px;
-    background: #181818;
-    display: block;
+    border-radius: calc(var(--radius-studio) - 4px);
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.02);
 }
 
 .project-card h3 {
-    font-size: 24px;
-    letter-spacing: -0.5px;
-    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
 }
 
 .project-card p {
-    font-size: 15px;
     color: var(--text-muted);
-    line-height: 1.6;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Subtle Tech Tag text matching reference */
+.project-card p[style*="font-size: 13px"] {
+    color: var(--accent-gold) !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
 }
 
 .project-card .project-btn {
-    margin-top: auto;
-    width: 100%;
-}
-
-/* Phase 5 Animation: Cards gently scale and grow borders */
-.project-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--border-hover);
-    box-shadow: var(--shadow-premium), var(--shadow-card-hover);
-}
-
-/* Custom icon styling for richer service items */
-.service-icon {
-    font-size: 24px;
-    margin-bottom: 16px;
-    color: var(--text-muted);
-}
-
-/* Process Timeline Layout Fixes */
-.process-card {
-    border-left: 2px solid var(--border-color) !important;
-    border-radius: 0px !important;
-    background: transparent !important;
-    padding-left: 25px !important;
-}
-
-.process-card:hover {
-    border-left-color: #ffffff !important;
-    transform: translateX(5px);
-    box-shadow: none !important;
-}
-
-.process-step {
-    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-pure);
+    width: fit-content;
+    padding: 10px 20px;
     font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 1px;
+}
+
+.project-card:hover {
+    border-color: var(--accent-gold);
+    transform: translateY(-5px);
+}
+
+.project-card:hover .project-btn {
+    background: var(--accent-gold);
+    color: var(--bg-darker);
+    border-color: var(--accent-gold);
 }
 
 /* ==========================================================================
-   CONTACT FORM & CALL TO ACTION PANEL
+   SERVICES & PROCESS OVERHAUL
+   ========================================================================== */
+#services .project-card {
+    padding: 40px 30px;
+}
+
+#services .project-card h3 {
+    margin-top: 15px;
+}
+
+.process-card {
+    border-left: 1px solid var(--border-subtle) !important;
+    padding-left: 30px !important;
+}
+
+.process-card h4 {
+    color: var(--accent-gold);
+}
+
+/* ==========================================================================
+   PREMIUM CONTACT FORM FORM LAYOUT
    ========================================================================== */
 .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 40px;
-    width: 100%;
-    max-width: 550px; 
+    max-width: 600px;
+    margin-top: 30px;
 }
 
 .contact-form input,
 .contact-form textarea {
-    width: 100%;
-    padding: 16px 22px;
-    background: var(--bg-input);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    color: #ffffff;
-    font-size: 15px;
-    font-family: inherit;
-    outline: none;
-    transition: var(--transition-smooth);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-studio);
+    padding: 18px;
+    color: var(--text-pure);
+    font-size: 14px;
+    margin-bottom: 16px;
+    transition: var(--transition-premium);
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-    border-color: #ffffff; 
-    background: #1a1a1a;
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.02);
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 20px rgba(226, 161, 58, 0.05);
 }
 
 .contact-form button {
-    margin-top: 10px;
+    background: var(--accent-gold);
+    color: var(--bg-darker);
+    cursor: pointer;
     width: 100%;
 }
 
@@ -416,131 +344,39 @@ button:hover,
    FOOTER SETUP
    ========================================================================== */
 footer {
-    padding: 80px 8% 60px 8%;
-    border-top: 1px solid var(--border-color);
+    background: var(--bg-darker);
+    padding: 60px 8%;
+    border-top: 1px solid var(--border-subtle);
     text-align: center;
 }
 
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-footer .logo {
-    font-weight: 700; 
-    color: #fff; 
-    font-size: 20px;
-    margin-bottom: 12px;
-}
-
-footer p {
-    font-size: 14px; 
-    color: var(--text-muted);
-}
-
-.footer-links {
-    display: flex; 
-    justify-content: center; 
-    gap: 28px; 
-    margin: 30px 0;
-}
-
 .footer-links a {
-    color: var(--text-muted); 
-    text-decoration: none; 
-    font-size: 13px;
-    transition: var(--transition-smooth);
+    color: var(--text-muted);
+    transition: var(--transition-premium);
 }
 
 .footer-links a:hover {
-    color: #fff;
+    color: var(--accent-gold);
 }
 
 /* ==========================================================================
-   PHASE 6: MEDIA RESPONSIVE CONTROLS (TABLETS & SMARTPHONES)
+   RESPONSIVE DESIGN (RESPONSIVE VIEW SAFARI/CHROME)
    ========================================================================== */
 @media (max-width: 1024px) {
-    section {
-        padding: 90px 6%;
-    }
-    
-    .hero-grid {
-        gap: 40px;
-    }
-    
-    #home h2 {
-        font-size: 48px;
-    }
-    
-    .projects-grid {
+    .hero-grid, .projects-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    #home h2 { font-size: 44px; }
 }
 
 @media (max-width: 768px) {
-    header {
-        padding: 20px 5%;
-    }
-
-    /* Mobile Header Layout Stacking */
-    .header-wrapper {
-        flex-direction: column;
-        gap: 16px;
-        text-align: center;
-    }
-
-    nav {
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-        width: 100%;
-    }
-
-    nav a {
-        margin: 0; 
-        font-size: 14px;
-    }
-
-    section {
-        padding: 80px 5%;
-        min-height: auto;
-    }
-
-    section h2 {
-        font-size: 36px;
-    }
-
-    /* Mobile Hero Layout Stacking */
-    .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 50px;
-    }
-
-    #home h2 {
-        font-size: 40px;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-        gap: 12px;
-    }
-
-    .hero-buttons .project-btn {
-        width: 100%;
-    }
-
-    .hero-card {
-        height: 340px;
-        padding: 30px;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
+    header { position: relative; padding: 20px; }
+    .header-wrapper { flex-direction: column; gap: 15px; }
+    nav { justify-content: center; flex-wrap: wrap; gap: 15px; }
+    nav a { margin: 0; }
     
-    .project-card {
-        min-height: auto;
-    }
+    #home { padding-top: 40px; }
+    .hero-grid, .projects-grid { grid-template-columns: 1fr; }
+    #home h2 { font-size: 36px; }
+    .hero-card { height: 300px; }
 }
